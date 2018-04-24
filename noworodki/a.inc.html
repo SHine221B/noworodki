@@ -1,0 +1,54 @@
+<b>Podaj imię i wzrost najwyższego chłopca oraz imię i wzrost najwyższej dziewczynki:</b><br><br>
+Chłopiec:<br>
+
+<?php
+    
+    $sql = "SELECT * FROM noworodki WHERE plec LIKE 's' ORDER BY wzrost DESC;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0)
+    {
+        echo "<table border=\"1\">";
+        
+        echo '<tr><td><b>imię dziecka</b></td><td><b>wzrost</b></td></tr>';
+        
+        // output data of each row
+        if($row = mysqli_fetch_assoc($result))
+        {
+            echo '<tr><td>' . $row["imie"] . '</td><td>' . $row["wzrost"] . '</td></tr>';
+        }
+        
+        echo "</table>";
+    }
+    else
+    {
+     echo "0 results";
+    }
+?>
+
+<br><br>Dziewczynka:<br><br>
+
+<?php
+    
+    $sql = "SELECT * FROM noworodki WHERE plec LIKE 'c' ORDER BY wzrost DESC;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0)
+    {
+        echo "<table border=\"1\">";
+        
+        echo '<tr><td><b>imię dziecka</b></td><td><b>wzrost</b></td></tr>';
+        
+        // output data of each row
+        if($row = mysqli_fetch_assoc($result))
+        {
+            echo '<tr><td>' . $row["imie"] . '</td><td>' . $row["wzrost"] . '</td></tr>';
+        }
+        
+        echo "</table>";
+    }
+    else
+    {
+     echo "0 results";
+    }
+?>

@@ -1,0 +1,28 @@
+<b>Podaj imiona kobiet w wieku poniżej 25 lat, które urodziły dzieci o wadze powyżej 4000g:</b><br>
+
+
+<?php
+    
+    $sql = "SELECT * FROM noworodki INNER JOIN mamy ON identyfikator_matki = identyfikator_matki WHERE wiek_matki<25 AND waga>4000 ORDER BY waga DESC;
+";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0)
+    {
+        echo "<table border=\"1\">";
+        
+        echo '<tr><td><b>imię matki</b></td><td><b>wiek matki</b></td><td><b>waga dziecka</b></td></tr>';
+        
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result))
+        {
+            echo '<tr><td>' . $row["imie_matki"] . '</td><td>' . $row["wiek_matki"] . '</td><td>' . $row["waga"] .' </td></tr>';
+        }
+        
+        echo "</table>";
+    }
+    else
+    {
+     echo "0 results";
+    }
+?>

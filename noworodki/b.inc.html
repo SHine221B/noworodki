@@ -1,0 +1,26 @@
+<b>W którym dniu urodziło się najwięcej dzieci? Podaj datę i liczbę dzieci:</b>
+
+<?php
+    
+    $sql = "SELECT data_urodzenia, Count(Identyfikator) AS suma FROM noworodki GROUP BY data_urodzenia ORDER BY Count(Identyfikator) DESC;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0)
+    {
+        echo "<table border=\"1\">";
+        
+        echo '<tr><td><b>data urodzenia</b></td><td><b>l.dzieci</b></td></tr>';
+        
+        // output data of each row
+        if($row = mysqli_fetch_assoc($result))
+        {
+            echo '<tr><td>' . $row["data_urodzenia"] . '</td><td>' . $row["suma"] . '</td></tr>';
+        }
+        
+        echo "</table>";
+    }
+    else
+    {
+     echo "0 results";
+    }
+?>
